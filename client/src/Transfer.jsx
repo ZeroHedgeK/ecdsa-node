@@ -4,6 +4,7 @@ import server from "./server";
 function Transfer({ address, setBalance }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [privateKey, setPrivateKey] = useState("");
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
 
@@ -17,6 +18,7 @@ function Transfer({ address, setBalance }) {
         sender: address,
         amount: parseInt(sendAmount),
         recipient,
+        privateKey,
       });
       setBalance(balance);
     } catch (ex) {
@@ -44,6 +46,16 @@ function Transfer({ address, setBalance }) {
           value={recipient}
           onChange={setValue(setRecipient)}
         ></input>
+      </label>
+
+      <label>
+        Sender's private key
+        <input
+          placeholder="Enter your private key here"
+          value={privateKey}
+          onChange={setValue(setPrivateKey)}
+        ></input>
+
       </label>
 
       <input type="submit" className="button" value="Transfer" />
